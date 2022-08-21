@@ -1,1 +1,53 @@
-
+pipeline {
+      agent any
+      stages {
+          stage('Opr_Stage_One_2182855c') {
+			  steps {
+				echo '2182855c Start of Operation Pipeline'
+			  }
+          }
+		  
+		  stage('Opr_Stage_Two_2182855c') {
+			  steps {
+				
+				echo '2182855c Backup websvr image created'
+			  }
+          }
+		  
+          stage('Opr_Stage_Three_2182855c') {
+			  steps {
+				input('2182855c Roll out new update to Prod Web?')
+			  }
+          
+		  }
+          stage('Opr_Stage_Four_2182855c') {
+			  when {
+					not {
+						branch "New update NOT roll out"
+					}
+			  }
+			  steps {
+					 sh '''#!/bin/bash
+					 targets=puppetclient1;
+					 locate_script='/testdir/work/devops_repo/script_to_run';
+					 docker cp $locate_script $targets://$locate_script;
+					 bolt script run $locate_script -t $targets -u clientadm -p user123 --no-host-key-check --run-as root;
+					 '''
+					 echo '2182855c Update Operation Completed'
+			  }
+          }
+		  
+		  stage('Opr_Stage_Five_2182855c') {
+			  steps {
+				echo '2182855c Production website is tested o.k.'				
+			  }
+          }
+		  
+		  stage('Opr_Stage_Six_2182855c') {
+			  steps {
+				echo '2182855c Production website is updated successfully'
+			  }
+          }
+		  
+      }
+}
