@@ -9,9 +9,7 @@ pipeline {
 		  
 		  stage('Opr_Stage_Two_2182855c') {
 			  steps {
-				sh '''#!/bin/bash
-				docker rmi 2182855c_websvr_image --run-as root; docker commit 2182855c_websvr 2182855c_websvr_image --run-as root
-				'''
+				
 				echo '2182855c Backup websvr image created'
 			  }
           }
