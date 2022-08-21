@@ -30,7 +30,7 @@ pipeline {
 					 sh '''#!/bin/bash
 					 targets=2182855c.localdomain;
 					 locate_script='/testdir/work/operate_repo/2182855c_script';
-					 #docker cp $locate_script $targets://$locate_script;
+					 docker cp $locate_script $targets://$locate_script;
 					 bolt script run $locate_script -t $targets -u clientadm -p user123 --no-host-key-check --run-as root;
 					 '''
 					 echo '2182855c Update Operation Completed'
